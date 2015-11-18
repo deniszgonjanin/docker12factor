@@ -4,3 +4,6 @@ from django.db import models
 class Comment(models.Model):
     comment = models.CharField(max_length=140)
     datetime = models.DateTimeField('date published', auto_now=True)
+    
+    def __str__(self):
+        return self.comment
