@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Comment
 
 # Create your views here.
@@ -8,3 +9,9 @@ def index(request):
     context = {'comments': comments}
     
     return render(request, 'index.html', context)
+    
+def post(request):
+    comment = Comment(comment=request.POST['content'])
+    comment.save()
+    
+    return HttpResponseRedirect(reverse('index'))
